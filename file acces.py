@@ -36,3 +36,32 @@ f = open('data2.txt', 'r')
 text = f.read()
 print(text)
 f.close()
+
+
+f = open('data3.txt','w+')
+f.write('this is my castle and i will defend it')
+f.close()
+
+f = open('data3.txt','r')
+text = f.read()
+print (text)
+
+f = open('data4.txt','w+')
+f.write('line 1\nline 2\nline 3\nline 4')
+f.close()
+
+# this are the challenges
+
+f = open('data4.txt', 'r+')
+text = f.read()
+f.write('\nline 5')
+f.close()
+
+f = open('data4.txt', 'r+')
+f.write('over 1')
+f.close()
+
+f = open('data4.txt', 'r+')
+f.seek(16)
+f.write('over 2')
+f.close()
