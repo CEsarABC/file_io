@@ -1,35 +1,40 @@
+import random
+
 def show_menu():
     print("1. Ask questions")
     print("2. Add question")
-    print("3. Exit game")
+    print("3. Delete a question")
+    print("4. Exit game")
 
     option = input("Enter option: ")
     return option
 
 
-def ask_questions():
-    questions = []
-    answers = []
+questions = []
+answers = []
 
-    with open('questions.txt', 'r') as file:
+with open('questions.txt', 'r') as file:
         lines = file.read().splitlines()
 
-    for i, text in enumerate(lines):
-        if i % 2 == 0:
-            questions.append(text)
-        else:
-            answers.append(text)
+for i, text in enumerate(lines):
+    if i % 2 == 0:
+        questions.append(text)
+    else:
+        answers.append(text)
 
-    number_of_questions = len(questions)
-    questions_and_answers = zip(questions, answers)
+number_of_questions = len(questions)
+questions_and_answers = zip(questions, answers)
+zipList = list(questions_and_answers)
+random.shuffle(zipList)
 
+
+def ask_questions():
     score = 0
 
-    print('this is the tuple {0}'.format(questions_and_answers))
-
-    for question, answer in questions_and_answers:
+    for question, answer in zipList:
         guess = input(question + '> ')
         if guess == answer:
+            score += 1
             print('Right!')
         else:
             print('Wrong!')
@@ -50,6 +55,24 @@ def add_question():
     file.close()
 
 
+def delete_a_question():
+    print(questions)
+    print('Which question would you like to erase??')
+    print('from 0 to', + len(zipList)-1)
+    option_delete = int(input('>'))
+    if option_delete == 0:
+        questions.pop(0)
+        answers.pop(0)
+    elif option_delete == 1:
+        questions.pop(1)
+        answers.pop(1)
+    elif option_delete == 2:
+        questions.pop(2)
+        answers.pop(2)
+    else:
+        print('not a choice')
+    print(questions)
+
 def game_loop():
     while True:
         option = show_menu()
@@ -60,6 +83,9 @@ def game_loop():
             print('You selected /add a question')
             add_question()
         elif option == '3':
+            print('You selected /Delete a question')
+            delete_a_question()
+        elif option == '4':
             print('you selected /Exit game')
             break
         else:
@@ -67,6 +93,5 @@ def game_loop():
         print('')
 
 
-# game_loop()
+game_loop()
 
-ask_questions()
