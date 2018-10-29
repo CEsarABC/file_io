@@ -6,3 +6,5 @@ What is the capital of France?
 paris
 whats the capital of brasil?
 brasilia
+whats the capital of venezuela?
+caracas

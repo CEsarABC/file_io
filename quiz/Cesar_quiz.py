@@ -1,3 +1,7 @@
+''' The quiz is more refined
+we can make random questions and delete selected questions
+by index '''
+
 import random
 
 def show_menu():
@@ -13,6 +17,26 @@ def show_menu():
 questions = []
 answers = []
 
+
+def delete_a_question():
+    print(questions)
+    print('Which question would you like to erase??')
+    print('from 0 to', + len(questions)-1)
+    option_delete = int(input('>'))
+    if option_delete == 0:
+        questions.pop(0)
+        answers.pop(0)
+    elif option_delete == 1:
+        questions.pop(1)
+        answers.pop(1)
+    elif option_delete == 2:
+        questions.pop(2)
+        answers.pop(2)
+    else:
+        print('not a choice')
+    print(questions)
+
+
 with open('questions.txt', 'r') as file:
         lines = file.read().splitlines()
 
@@ -22,13 +46,13 @@ for i, text in enumerate(lines):
     else:
         answers.append(text)
 
-number_of_questions = len(questions)
-questions_and_answers = zip(questions, answers)
-zipList = list(questions_and_answers)
-random.shuffle(zipList)
-
 
 def ask_questions():
+    number_of_questions = len(questions)
+    questions_and_answers = zip(questions, answers)
+    zipList = list(questions_and_answers)
+    random.shuffle(zipList)
+
     score = 0
 
     for question, answer in zipList:
@@ -54,24 +78,6 @@ def add_question():
     file.write(answer + '\n')
     file.close()
 
-
-def delete_a_question():
-    print(questions)
-    print('Which question would you like to erase??')
-    print('from 0 to', + len(zipList)-1)
-    option_delete = int(input('>'))
-    if option_delete == 0:
-        questions.pop(0)
-        answers.pop(0)
-    elif option_delete == 1:
-        questions.pop(1)
-        answers.pop(1)
-    elif option_delete == 2:
-        questions.pop(2)
-        answers.pop(2)
-    else:
-        print('not a choice')
-    print(questions)
 
 def game_loop():
     while True:
